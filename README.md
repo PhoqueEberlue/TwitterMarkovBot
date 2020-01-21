@@ -5,7 +5,7 @@ This is a twitter bot that collects data from an user, in order to tweet based o
 
 Pre Requirements: Python 3, **Python twitter**, ***an Twitter developper account***
 
-First, put your [API keys](https://developer.twitter.com/en/apps/) that you can find at  and copy paste the different keys in the area made for it in the config.py file.
+First, put your [API keys](https://developer.twitter.com/en/apps/) and copy paste the different keys in the area made for it in the config.py file.
 
 Then you have to [get the ID of the account](https://tweeterid.com/) that you want to gather tweets 
 and put it in the bot.py file at the line 39.
@@ -33,11 +33,11 @@ I use the function GetUserTimeLine in order to get all the tweets that the accou
 ![Screenshot](img/GatheringTweets.png)
 
 There is a lot of parameters that you can modify in this function but i won't explain everything as there is already a great documentation: 
-    `user_id` = The account's ID
-    `screen_name` = The name of the account
-    `count` = The number of tweets that you want to gather (max = 200)
-    `include_rts` = To get or not retweets
-    `exclude_replies` = To get or not replies 
+-   `user_id` = The account's ID
+-   `screen_name` = The name of the account
+-   `count` = The number of tweets that you want to gather (max = 200)
+-   `include_rts` = To get or not retweets
+-   `exclude_replies` = To get or not replies 
 
 This function return an array that contains all of the tweets that you gathered.
 
@@ -49,7 +49,7 @@ A dictionnary is created based on the data that is gathered by the twitter API:
     -   as key, the word that follows the word in the base dictionnary
     -   as value, the number of time that this word follows the word in the base dictionnary.
 
-The starting words list contains the words that are after an ending ponctuation like ".", "!", "?", "..." And new : "¶" (it replaces the \n considering that people don't use ponctuation nowadays).
+The starting words list contains the words that are after an ending ponctuation like ".", "!", "?", "..." And new : "¶" (it replaces the \n considering that people no longer use ponctuation nowadays).
 
 The ending words list contains the words that are before an ending ponctuation like ".", "!", "?", "...", "¶".
 
