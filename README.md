@@ -60,9 +60,9 @@ The algorithm works like this:
     -   add a random word that follows the previous word to the sentence (but with probabilities ex: 'it': {'is': 2, 'looks': 1} → you have more chances to pick 'is' than to pick 'looks')
 -   return the sentence
 
-Furthermore, i've added a while loop in order to verify that the sentence insn't offensive or thing like that, cause it can happens.
-
-When the setence looks good/fun just type "ok" and the program will cal the function `postStatus` that uses the PostUpdate function of the twitter API.
+Furthermore, i've added a while loop in order to read the tweets before it is posted, and to select a generation that you prefer.
+ 
+When the setence looks good/fun just type "ok" and the program will call the function `postStatus` that uses the PostUpdate function of the twitter API.
 
 ![Screenshot](img/SendingPost.png)
 
