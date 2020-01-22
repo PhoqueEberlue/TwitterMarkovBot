@@ -10,8 +10,7 @@ First, put your [API keys](https://developer.twitter.com/en/apps/) and copy past
 Then you have to [get the ID of the account](https://tweeterid.com/) that you want to gather tweets 
 and put it in the bot.py file at the line 39.
 
-Finaly just launch bot.py script by using a cmd or the .bat file.
-
+Finaly just launch bot.py script by using a terminal.
 ![Screenshot](img/CommandExample.png)
 
 # How does it work ?
