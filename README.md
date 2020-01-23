@@ -3,14 +3,14 @@ This is a twitter bot that collects data from an user, in order to tweet based o
 
 # Table of content
 
-[ How to use it ](#HowToUseIt)
-[ How does it work ](#HowDoesItWork)
--   [ The input ](#TheInput)
-    -   [ Gathering data ](#GatheringData)
-    -   [ Using the Markov Chain principle ](#UsingMarkovChain)
--   [ The output ](#TheOutput)
-[ Can i help you ? ](#CanIHelpYou)
-[ That's a lot of data ! ](#HowDoesItWork)
+-   [ How to use it ](#HowToUseIt)
+-   [ How does it work ](#HowDoesItWork)
+    -   [ The input ](#TheInput)
+        -   [ Gathering data ](#GatheringData)
+        -   [ Using the Markov Chain principle ](#UsingMarkovChain)
+    -   [ The output ](#TheOutput)
+-   [ Can i help you ? ](#CanIHelpYou)
+-   [ That's a lot of data ! ](#HowDoesItWork)
 
 
 <a name="HowToUseIt"></a>
