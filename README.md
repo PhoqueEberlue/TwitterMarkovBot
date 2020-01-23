@@ -1,6 +1,19 @@
 # TwitterMarkovBot
 This is a twitter bot that collects data from an user, in order to tweet based on the Markov chain principle.
 
+# Table of content
+
+[ How to use it ](#HowToUseIt)
+[ How does it work ](#HowDoesItWork)
+-   [ The input ](#TheInput)
+    -   [ Gathering data ](#GatheringData)
+    -   [ Using the Markov Chain principle ](#UsingMarkovChain)
+-   [ The output ](#TheOutput)
+[ Can i help you ? ](#CanIHelpYou)
+[ That's a lot of data ! ](#HowDoesItWork)
+
+
+<a name="HowToUseIt"></a>
 # How to use it ?
 
 Pre Requirements: Python 3, **Python twitter**, ***an Twitter developper account***
@@ -13,6 +26,7 @@ and put it in the bot.py file at the line 39.
 Finaly just launch bot.py script by using a terminal.
 ![Screenshot](img/CommandExample.png)
 
+<a name="HowDoesItWork"></a>
 # How does it work ?
 
 First you should probably do some research on Markov chain, because it can be used in many different situation, and this project here is just one of the uses of it.
@@ -21,8 +35,10 @@ The example that i've picked below is really simple as i want to explain the pri
 
 ![Screenshot](img/SimpleExplanation.png)
 
+<a name="TheInput"></a>
 ## The input
 
+<a name="GatheringData"></a>
 ### Gathering data
 
 The Data Gathering part is really simple as we use the twitter API.
@@ -40,6 +56,7 @@ There is a lot of parameters that you can modify in this function but i won't ex
 
 This function return an array that contains all of the tweets that you gathered.
 
+<a name="UsingMarkovChain"></a>
 ### Using the Markov Chain principle
 
 A dictionnary is created based on the data that is gathered by the twitter API:
@@ -52,6 +69,7 @@ The starting words list contains the words that are after an ending ponctuation 
 
 The ending words list contains the words that are before an ending ponctuation like ".", "!", "?", "...", "¶".
 
+<a name="TheOutput"></a>
 ## The output
 
 The algorithm works like this:
@@ -66,10 +84,12 @@ When the setence looks good/fun just type "ok" and the program will call the fun
 
 ![Screenshot](img/SendingPost.png)
 
+<a name="CanIHelpYou"></a>
 # Can i help you ?
 
 Sure ! Don't hesitate to propose some upgrades by doing commits, i will make sure to tell you what i'm thinking about those changes.
 
+<a name="ThatsALotOfData"></a>
 # That's a lot of data !
 
 ![Screenshot](img/ALotOfData.png)

@@ -1,2 +1,0 @@
-python bot.py
-pause
