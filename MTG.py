@@ -81,7 +81,7 @@ def Generating(Data_File):
 def Output(Data_File, n):
     """
     parameters: the data file (str), the output file (str), the number of sentence you want (int)
-    result: None, this function modify the output file
+    result: str
     """
     res = ''
     for _ in range(n):
