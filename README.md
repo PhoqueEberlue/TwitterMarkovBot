@@ -87,7 +87,7 @@ When the setence looks good/fun just type "ok" and the program will call the fun
 <a name="CanIHelpYou"></a>
 # Can i help you ?
 
-Sure ! Don't hesitate to propose some upgrades by doing commits, i will make sure to tell you what i'm thinking about those changes.
+Sure ! Don't hesitate to propose some upgrades by doing pull requests, i will make sure to tell you what i'm thinking about those changes.
 
 <a name="ThatsALotOfData"></a>
 # That's a lot of data !
