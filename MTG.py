@@ -1,25 +1,26 @@
 # coding: utf-8
+import json
 from random import randint
-
 
 def Extraction_From_TXT(Data_File):
     """
-    parameters: a txt file (str)
-    result: a list of every words used in the txt
+    parameters: a txt file (str).
+    result: a list of every words used in the txt.
     """
-    data = open(Data_File, "r",
-                encoding="utf-8")
+    with open(Data_File, "r", encoding="utf-8") as read_file:
+            tweets = json.load(read_file)
+    data = ""
+    for tweet in tweets.keys():
+        data += tweets[tweet]['text'] + "\n"
     Word_List = []
-    for word in data.read().split():  # .split() splits each items if they are separated by " " or "\n"
+    for word in data.split():  # .split() splits each items if they are separated by " " or "\n"
         Word_List.append(word)
-    data.close()
     return Word_List
-
 
 def Probability_Per_Word(Data_File):
     """
-    parameters: a txt file (str)
-    result: a dictionnary of probabilities
+    parameters: a txt file (str).
+    result: a dictionnary of probabilities.
     """
     Word_List = Extraction_From_TXT(Data_File)
     Word_assembly = set(Word_List)
@@ -42,8 +43,8 @@ def Probability_Per_Word(Data_File):
 
 def Starting_And_Ending_Words(Data_File):
     """
-    parameters: a txt file (str)
-    result: a tuple with the list of the starting words and the list of the endings words 
+    parameters: a txt file (str).
+    result: a tuple with the list of the starting words and the list of the endings words.
     """
     Word_List = Extraction_From_TXT(Data_File)
     Starting_Words = []
@@ -60,15 +61,15 @@ def Starting_And_Ending_Words(Data_File):
 
 def Generating(Data_File):
     """
-    parameters: a txt file (str)
-    result: a sentence generated with the markov chain principle
+    parameters: a txt file (str).
+    result: a sentence generated with the markov chain principle.
     """
     Word_dictionnary = Probability_Per_Word(Data_File)
     Starting_Words = Starting_And_Ending_Words(Data_File)['StartingWords']
     Ending_Words = Starting_And_Ending_Words(Data_File)['EndingWords']
     First_random = randint(0, len(Starting_Words) - 1)
-    res = Starting_Words[First_random]
     Word = Starting_Words[First_random]
+    res = Starting_Words[First_random]
     while Word not in Ending_Words:
         Ocurrences = []
         for (WordO, number) in Word_dictionnary[Word].items():
@@ -80,8 +81,8 @@ def Generating(Data_File):
 
 def Output(Data_File, n):
     """
-    parameters: the data file (str), the output file (str), the number of sentence you want (int)
-    result: str
+    parameters: the data file (str), the output file (str), the number of sentence you want (int).
+    result: str.
     """
     res = ''
     for _ in range(n):
