@@ -52,8 +52,6 @@ def menu2():
     Narkuss.PostReply(tweet, LastTweet.id)
 
 
-
-
 UserInput = ''
 while UserInput != 'quit':
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -62,8 +60,8 @@ while UserInput != 'quit':
     print('+---------------------------------------------+')
     print('| 1. Post a status                            |')
     print('| 2. Reply to someone\'s last tweet            |')
-    print('| 3. update replid list                       |')
-    print('| 4. update tweet streeam                     |')
+    print('| 3. update replied list                      |')
+    print('| 4. update tweet stream                      |')
     print('| 5. Quit                                     |')
     print('+---------------------------------------------+')
 

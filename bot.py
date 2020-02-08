@@ -120,8 +120,17 @@ class Bot:
                 userToRemove.append(User)
         for User in userToRemove:
             res.pop(User)
+
+        i = 0
         for User in res.keys():
             res[User]["screen_name"] = api.GetUser(User).screen_name
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("+" + "-"*100 + "+")
+            print("|" + round(i/len(res)*100)*'█' + ((round(i/len(res)*100)-100)*-1)*' ' + '|')
+            print("+" + "-"*100 + "+")
+            print(str(round(i/len(res)*100)) + "%")
+            i += 1
+            
         self._repliedUsers = res
 
     # GETTER
