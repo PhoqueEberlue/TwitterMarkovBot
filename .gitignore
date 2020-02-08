@@ -130,4 +130,4 @@ dmypy.json
 .vscode/settings.json
 
 # Personnal gitignore
-README.md
+/README.md
