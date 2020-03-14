@@ -1,4 +1,3 @@
-# coding: utf-8
 import json
 from random import randint
 
@@ -87,4 +86,16 @@ def Output(Data_File, n):
     res = ''
     for _ in range(n):
         res += Generating(Data_File) + '\n'
+    return res
+
+def OutputWithKey(Data_File, n, Key):
+    """
+    parameters: the data file (str), the output file (str), the number of sentence you want (int).
+    result: str.
+    """
+    res = ''
+    while Key not in res:
+        res = ''
+        for _ in range(n):
+            res += Generating(Data_File) + '\n'
     return res
