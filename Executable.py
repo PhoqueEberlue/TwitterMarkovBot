@@ -42,9 +42,6 @@ def configurationMenu():
 if settings["UserId"] == None:
     configurationMenu()
 
-
-
-
 #Main menu
 table = Table(show_header=True, header_style="Green")
 table.add_column("Twitter Markov Bot")
@@ -62,7 +59,7 @@ def menu1():
     entered = ''
     while entered != 'ok':
         clearConsole()
-        tweet = bot.GenerateTweet("data_tweets.json", 2)
+        tweet = bot.GenerateTweet()
         tweetTable = Table(show_header=True, header_style="Green")
         tweetTable.add_column("Post a status")
         tweetTable.add_row(tweet)
@@ -152,4 +149,4 @@ while UserInput != 'quit':
     if UserInput == "6":
         menu6()
     if UserInput == "7":
-        UserInput = 'quit'
+        UserInput = 'quit'    
