@@ -14,7 +14,7 @@ class Bot:
     def __init__(self, user, filename, repliesFilename):
         """
         user: The id of the user that you want to collect data from and that will be used in the app.
-        filename: the name of the file that you want to store user's tweets (exluding replies) ex: "data_tweets.json". Please insert {} in this file otherwise it'll crash.
+        filename: the name of the file that you want to store user's tweets (exluding replies) e.g: "data_tweets.json". Please insert {} in this file otherwise it'll crash.
         repliesFilename: the name of the file that you want to store user's tweets (only replies to other users) ex: "data_replies.json". Please insert {} in this file otherwise it'll crash.
         """
         self._user = user
@@ -56,7 +56,8 @@ class Bot:
                     if link:
                         if text[i] == ' ' or text[i] == '\n':
                             link = False
-                tweets[post.id] = {"text": filteredtext, "date": post.created_at}
+                if filteredtext != "":
+                    tweets[post.id] = {"text": filteredtext, "date": post.created_at}
         with open(self._filename, "w", encoding="utf-8") as write_file:
             json.dump(tweets, write_file)
 
@@ -67,7 +68,7 @@ class Bot:
         """
         with open(self._repliesFilename, "r", encoding="utf-8") as read_file:
             tweets = json.load(read_file)
-        for post in self._stream:
+        for post in reverse(self._stream):
             text = post.full_text
             filteredtext = ''
             link = False
@@ -147,7 +148,7 @@ class Bot:
                 self._MarkovChain.setCoef(self._MarkovChain.getCoef()+0.01)
             elif(moyPoster<moyBot):
                 self._MarkovChain.setCoef(self._MarkovChain.getCoef()-0.01)
-            if abs(moyBot-moyPoster) < 1 and abs(moyPoster-moyBot) < 1:
+            if abs(moyBot-moyPoster) < 2 and abs(moyPoster-moyBot) < 2:
                 condition = False
             '''    
             print(moyPoster)
@@ -201,10 +202,16 @@ class Bot:
                 return True
         return False
     
-    def getNextPostDate(self):
+    def getNextPostDate(self, hour, utc):
         self._MarkovChain.setData()
         data = self._MarkovChain.getData()
-        #todo
+        nextHour = false
+        for tweet in data.keys:
+            if data[tweet]["date"] + utc == hour:
+                nextHour = True
+            if nextHour:
+                return 
+                
     
     # POSTER
     def PostTweet(self, tweet):
