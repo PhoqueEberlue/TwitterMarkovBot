@@ -1,14 +1,16 @@
 from MarkovChain import MarkovChain
-from random import randint
 from config import getApi
 from rich.console import Console
-from rich.table import Column, Table
+from rich.table import Table
+from random import randint
 import os
 import json
 import requests
+import datetime as dt
 
 api = getApi()
 console = Console()
+
 
 class Bot:
     def __init__(self, user, filename, repliesFilename):
@@ -48,8 +50,9 @@ class Bot:
             link = False
             if str(post.id) not in tweets.keys():
                 for i in range(len(text)):
-                    if (len(text))-i >= 7:
-                        if text[i] == 'h' and text[i+1] == 't' and text[i+2] == 't' and text[i+3] == 'p' and text[i+4] == 's' and text[i+5] == ':' and text[i+6] == '/' and text[i+7] == '/':
+                    if (len(text)) - i >= 7:
+                        if text[i] == 'h' and text[i + 1] == 't' and text[i + 2] == 't' and text[i + 3] == 'p' and text[
+                            i + 4] == 's' and text[i + 5] == ':' and text[i + 6] == '/' and text[i + 7] == '/':
                             link = True
                     if not link:
                         filteredtext += text[i]
@@ -61,6 +64,27 @@ class Bot:
         with open(self._filename, "w", encoding="utf-8") as write_file:
             json.dump(tweets, write_file)
 
+    def test(self):
+        File = open('Data.txt', 'w',
+                    encoding="utf-8")
+        for post in self._stream:
+            text = post.full_text
+            filteredtext = ''
+            link = False
+            for i in range(len(text)):
+                if (len(text)) - i >= 7:
+                    if text[i] == 'h' and text[i + 1] == 't' and text[i + 2] == 't' and text[i + 3] == 'p' and text[
+                        i + 4] == 's' and text[i + 5] == ':' and text[i + 6] == '/' and text[i + 7] == '/':
+                        link = True
+                if not link:
+                    filteredtext += text[i]
+                if link:
+                    if text[i] == ' ' or text[i] == '\n':
+                        link = False
+            File.write(filteredtext + '\n')
+        File.write('\n')
+        File.close()
+
     def StoringIntoJSONOnlyReplies(self):
         """
         Store user's stream (consider calling CollectingUsersTweets() before calling this one) into filename.
@@ -68,15 +92,17 @@ class Bot:
         """
         with open(self._repliesFilename, "r", encoding="utf-8") as read_file:
             tweets = json.load(read_file)
-        for post in reverse(self._stream):
+        for post in self._stream:
             text = post.full_text
             filteredtext = ''
             link = False
             mention = False
-            if str(post.id) not in tweets.keys() and post.in_reply_to_user_id != self._user and post.in_reply_to_user_id != None:
+            if str(
+                    post.id) not in tweets.keys() and post.in_reply_to_user_id != self._user and post.in_reply_to_user_id is not None:
                 for i in range(len(text)):
-                    if (len(text))-i >= 7:
-                        if text[i] == 'h' and text[i+1] == 't' and text[i+2] == 't' and text[i+3] == 'p' and text[i+4] == 's' and text[i+5] == ':' and text[i+6] == '/' and text[i+7] == '/':
+                    if (len(text)) - i >= 7:
+                        if text[i] == 'h' and text[i + 1] == 't' and text[i + 2] == 't' and text[i + 3] == 'p' and text[
+                            i + 4] == 's' and text[i + 5] == ':' and text[i + 6] == '/' and text[i + 7] == '/':
                             link = True
                     if text[i] == '@':
                         mention = True
@@ -118,19 +144,20 @@ class Bot:
             res[User]["screen_name"] = api.GetUser(User).screen_name
             os.system('cls' if os.name == 'nt' else 'clear')
             progressTable = Table(show_header=True, header_style="Green")
-            progressTable.add_column("Progress: " + str(round(i/len(res)*100)) + "%")
-            progressTable.add_row(((round(i/len(res)*100))//2)*'■' + (((round(i/len(res)*100)-100)//2)*-1)*'□')
+            progressTable.add_column("Progress: " + str(round(i / len(res) * 100)) + "%")
+            progressTable.add_row(
+                ((round(i / len(res) * 100)) // 2) * '■' + (((round(i / len(res) * 100) - 100) // 2) * -1) * '□')
             console.print(progressTable)
             i += 1
         self._repliedUsers = res
-    
+
     def refreshPorfilePicture(self):
-        image_url = (self.getUser(self._user).profile_image_url_https).replace('_normal', '')
+        image_url = self.getUser(self._user).profile_image_url_https.replace('_normal', '')
         img_data = requests.get(image_url).content
         with open('profile_picture.jpg', 'wb') as handler:
             handler.write(img_data)
         api.UpdateImage('profile_picture.jpg')
-        
+
     def AjustCoef(self):
         with open(self._filename, "r", encoding="utf-8") as read_file:
             tweets = json.load(read_file)
@@ -140,22 +167,22 @@ class Bot:
             moyBot = 0
             for tweet in tweets:
                 moyPoster += len(tweets[tweet]["text"])
-            moyPoster = moyPoster/len(tweets.keys())
+            moyPoster = moyPoster / len(tweets.keys())
             for _ in range(100):
                 moyBot += len(self._MarkovChain.generateTweet())
-            moyBot = moyBot/100
-            if(moyPoster>moyBot):
-                self._MarkovChain.setCoef(self._MarkovChain.getCoef()+0.01)
-            elif(moyPoster<moyBot):
-                self._MarkovChain.setCoef(self._MarkovChain.getCoef()-0.01)
-            if abs(moyBot-moyPoster) < 2 and abs(moyPoster-moyBot) < 2:
+            moyBot = moyBot / 100
+            if moyPoster > moyBot:
+                self._MarkovChain.setCoef(self._MarkovChain.getCoef() + 0.01)
+            elif moyPoster < moyBot:
+                self._MarkovChain.setCoef(self._MarkovChain.getCoef() - 0.01)
+            if abs(moyBot - moyPoster) < 2 and abs(moyPoster - moyBot) < 2:
                 condition = False
             '''    
             print(moyPoster)
             print(moyBot)
             print(self._MarkovChain.getCoef())
             '''
-                
+
     # GETTER
     def CollectLastTweetFromUser(self, user):
         """
@@ -193,7 +220,7 @@ class Bot:
         return a tweet generated by the Makov chain (str).
         """
         pass
-    
+
     def isKeyInData(self, Key):
         with open(self._filename, "r", encoding="utf-8") as read_file:
             tweets = json.load(read_file)
@@ -201,19 +228,32 @@ class Bot:
             if Key in tweets[tweet]["text"]:
                 return True
         return False
-    
-    def getNextPostDate(self, hour, utc):
-        self._MarkovChain.setData()
-        data = self._MarkovChain.getData()
-        nextHour = false
-        for tweet in data.keys:
-            if data[tweet]["date"] + utc == hour:
-                nextHour = True
-            if nextHour:
-                return 
-                
-    
-    # POSTER
+
+    def getWaitingTime(self):
+        tweets = api.GetUserTimeline(user_id=self._user, screen_name='', since_id='', max_id='',
+                                     count=200, include_rts=False, trim_user=True,
+                                     exclude_replies=True)
+        a = self.strToDate(tweets[1].created_at)
+        b = self.strToDate(tweets[0].created_at)
+        d = 0
+        if (b - a).days > 1:
+            d = (b - a).days
+        return d * 86400 + (abs(b.hour - dt.datetime.now().hour) * 60 * 60) + randint(0, 1800)
+
+    @staticmethod
+    def strToDate(dateStr):
+        months = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10,
+                  "Nov": 11, "Dec": 12}
+        year = int(dateStr[-4:])
+        month = months[dateStr[4:7]]
+        day = int(dateStr[8:10])
+        hour = int(dateStr[10:13]) + 2
+        minute = int(dateStr[14:16])
+        second = int(dateStr[17:19])
+        return dt.datetime(year, month, day, hour, minute, second)
+
+        # POSTER
+
     def PostTweet(self, tweet):
         """
         tweet: str.

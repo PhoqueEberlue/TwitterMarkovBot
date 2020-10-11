@@ -5,13 +5,17 @@ from rich.table import Column, Table
 from bot import Bot
 
 console = Console()
+
+
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-with open("TMBsettings.json", "r", encoding="utf-8") as read_file:
-            settings = json.load(read_file)
 
-#Configuration menu
+with open("TMBsettings.json", "r", encoding="utf-8") as read_file:
+    settings = json.load(read_file)
+
+
+# Configuration menu
 def configurationMenu():
     clearConsole()
     settingsTable = Table(show_header=True, header_style="Green")
@@ -26,7 +30,7 @@ def configurationMenu():
     settingsTable.add_row("Name: " + User.name)
     settingsTable.add_row("Screen Name: " + "@" + User.screen_name)
     settingsTable.add_row("Followers: " + str(User.followers_count))
-    settingsTable.add_row("Location: " + User.location )
+    settingsTable.add_row("Location: " + User.location)
     console.print(settingsTable)
     res = input()
     if res == "Y" or res == "y":
@@ -39,10 +43,11 @@ def configurationMenu():
     elif res == "N" or res == "n":
         pass
 
+
 if settings["UserId"] == None:
     configurationMenu()
 
-#Main menu
+# Main menu
 table = Table(show_header=True, header_style="Green")
 table.add_column("Twitter Markov Bot")
 table.add_row("1. Post a status")
@@ -54,6 +59,7 @@ table.add_row("6. refresh profile picture")
 table.add_row("7. Quit")
 
 bot = Bot(settings["UserId"], "data_tweets.json", "data_tweets_only_replies.json")
+
 
 def menu1():
     entered = ''
@@ -68,6 +74,7 @@ def menu1():
         if entered == "quit":
             return None
     bot.PostTweet(tweet)
+
 
 def menu2():
     inData = False
@@ -93,6 +100,7 @@ def menu2():
             return None
     bot.PostTweet(tweet)
 
+
 def menu3():
     clearConsole()
     selectTable = Table(show_header=True, header_style="Green")
@@ -114,7 +122,8 @@ def menu3():
     entered = ''
     while entered != 'ok':
         clearConsole()
-        tweet = "@" + dictionnary[UserToReplyId]["screen_name"] + " " + bot.GenerateTweet("data_tweets_only_replies.json", 1)
+        tweet = "@" + dictionnary[UserToReplyId]["screen_name"] + " " + bot.GenerateTweet(
+            "data_tweets_only_replies.json", 1)
         print("---------------Type \"quit\" to quit----------------------")
         print(dictionnary[UserToReplyId]["screen_name"] + ": " + LastTweet.full_text)
         print("--------------------------------------------------------")
@@ -125,9 +134,11 @@ def menu3():
             return None
     bot.PostReply(tweet, LastTweet.id)
 
+
 def menu6():
     bot.refreshPorfilePicture()
-    
+
+
 UserInput = ''
 while UserInput != 'quit':
     clearConsole()
@@ -149,4 +160,7 @@ while UserInput != 'quit':
     if UserInput == "6":
         menu6()
     if UserInput == "7":
-        UserInput = 'quit'    
+        UserInput = 'quit'
+    if UserInput == "8":
+        bot.CollectingUsersTweets(True, 200)
+        bot.test()
