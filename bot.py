@@ -193,6 +193,15 @@ class Bot:
                                         count=1, include_rts=False, trim_user=True, exclude_replies=True)
         return lastTweet[0]
 
+    def CollectLastTweetFromSelf(self):
+        """
+        user: the id of the user (int).
+        return the tweet of the last user.
+        """
+        lastTweet = api.GetUserTimeline(user_id=self._user, screen_name='', since_id='', max_id='',
+                                        count=1, include_rts=False, trim_user=True, exclude_replies=True)
+        return lastTweet[0]
+
     def getRepliedUserDictionnary(self):
         """
         return the dictionnary that contains all users that has been replied by the user.
