@@ -10,7 +10,7 @@ Firstly the bot stores all of the last tweets from the user in a JSON. Then it w
 
 As you can see it is simply constructing sentences of "chains" of 2 words, but it is also using the probabilities, for exmple if "maths" had been used 2 times after "the", the chain would contain:
         
-    {... 'the': {'maths':2, 'programmation'}, ...}
+    {... 'the': {'maths':2, 'programmation':1}, ...}
 Then maths would have a lot more chances to be constructed after "the".
 
 ## Setup
