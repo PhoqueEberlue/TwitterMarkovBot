@@ -17,7 +17,7 @@ async def on_ready():
     with open("logs.json", "r", encoding="utf-8") as read_file:
         logs = json.load(read_file)
     msg = list(logs.keys())[-1]
-    await channel.send(f'[{msg}]: {logs[msg]["tweet"]} | {logs[msg]["postingHour"]} | {logs[msg]["waitingTime"]}')
+    await channel.send(f'[{msg}]: {logs[msg]["tweet"]}')
     await client.logout()
 
 client.run(getToken())
