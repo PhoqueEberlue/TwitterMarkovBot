@@ -1,9 +1,9 @@
-# Welcome to the TwitterMarkovBot page !
-## What is it ?
+# Welcome to the TwitterMarkovBot page!
+## What is it?
 TwitterMakovBot is a Twitter bot that mimic the tweets of a given Twitter user using the [Markov chain](https://en.wikipedia.org/wiki/Markov_chain) principle.
 For this example I'll mimic [@NarkussLol](https://twitter.com/NarkussLol) with an account called [@NarkussBot](https://twitter.com/NarkussBot).
 
-## How does it work ?
+## How does it work?
 Firstly the bot stores all of the last tweets from the user in a JSON. Then it will be able to create new tweets that will look like the users one by using the Markov Chain.
 
 ![simple example of the markov chain](https://github.com/PhoqueEberlue/TwitterMarkovBot/blob/master/gitimages/simpleexample.png)
@@ -60,5 +60,5 @@ Globaly what I'm doing is just calling scriptbot.bash every hours with my raspbe
 
         $ ./scriptbot.bash &
 
-Thanks for reading !
+Thanks for reading!
 
