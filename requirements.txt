@@ -1,5 +1,5 @@
 discord.py==1.5.0
-requests==2.24.0
+requests==2.31.0
 discord==1.0.1
 python_twitter==3.5
 rich==9.2.0
